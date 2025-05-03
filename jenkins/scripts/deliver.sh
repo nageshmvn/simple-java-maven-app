@@ -20,7 +20,18 @@ set -x
 VERSION=`mvn -q -DforceStdout help:evaluate -Dexpression=project.version`
 set +x
 
-echo 'The following command runs and outputs the execution of your Java'
+# echo 'The following command runs and outputs the execution of your Java'
+# echo 'application (which Jenkins built using Maven) to the Jenkins UI.'
+# set -x
+# java -jar target/${NAME}-${VERSION}.jar
+
+echo 'The following command runs and outputs the execution of your Java and Store in UUUU'
 echo 'application (which Jenkins built using Maven) to the Jenkins UI.'
+
+# Remove all special characters from NAME and VERSION, keeping only alphanumerics, hyphens, and underscores
+NAME=$(echo "$NAME" | tr -cd '[:alnum:]_-')
+VERSION=$(echo "$VERSION" | tr -cd '[:alnum:]_-')
+
 set -x
 java -jar target/${NAME}-${VERSION}.jar
+
